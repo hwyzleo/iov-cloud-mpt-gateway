@@ -1,6 +1,6 @@
 package net.hwyz.iov.cloud.mpt.gateway.handler;
 
-import net.hwyz.iov.cloud.mpt.gateway.util.ServletUtils;
+import net.hwyz.iov.cloud.framework.common.util.ServletUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.web.reactive.error.ErrorWebExceptionHandler;
@@ -43,6 +43,6 @@ public class GatewayExceptionHandler implements ErrorWebExceptionHandler {
 
         log.error("[网关异常处理]请求路径:{},异常信息:{}", exchange.getRequest().getPath(), ex.getMessage());
 
-        return ServletUtils.webFluxResponseWriter(response, msg);
+        return ServletUtil.webFluxResponseWriter(response, msg);
     }
 }

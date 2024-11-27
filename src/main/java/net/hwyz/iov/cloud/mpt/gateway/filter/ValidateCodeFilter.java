@@ -3,9 +3,9 @@ package net.hwyz.iov.cloud.mpt.gateway.filter;
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
+import net.hwyz.iov.cloud.framework.common.util.ServletUtil;
 import net.hwyz.iov.cloud.mpt.gateway.config.properties.CaptchaProperties;
 import net.hwyz.iov.cloud.mpt.gateway.service.ValidateCodeService;
-import net.hwyz.iov.cloud.mpt.gateway.util.ServletUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
@@ -53,7 +53,7 @@ public class ValidateCodeFilter extends AbstractGatewayFilterFactory<Object> {
                 JSONObject obj = JSON.parseObject(rspStr);
                 validateCodeService.checkCaptcha(obj.getString(CODE), obj.getString(UUID));
             } catch (Exception e) {
-                return ServletUtils.webFluxResponseWriter(exchange.getResponse(), e.getMessage());
+                return ServletUtil.webFluxResponseWriter(exchange.getResponse(), e.getMessage());
             }
             return chain.filter(exchange);
         };

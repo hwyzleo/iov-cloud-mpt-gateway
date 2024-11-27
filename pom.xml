@@ -16,6 +16,7 @@
 
     <properties>
             <framework-redis.version>0.0.1-SNAPSHOT</framework-redis.version>
+            <framework-common.version>0.0.1-SNAPSHOT</framework-common.version>
     </properties>
 
     <dependencies>
@@ -74,18 +75,18 @@
             <artifactId>kaptcha</artifactId>
         </dependency>
 
+        <!-- 框架: 通用 -->
+        <dependency>
+            <groupId>net.hwyz.iov.cloud.framework</groupId>
+            <artifactId>framework-common-starter</artifactId>
+            <version>${framework-common.version}</version>
+        </dependency>
+
         <!-- 框架: Redis -->
         <dependency>
             <groupId>net.hwyz.iov.cloud.framework</groupId>
             <artifactId>framework-redis-starter</artifactId>
             <version>${framework-redis.version}</version>
-        </dependency>
-
-        <!-- Springdoc -->
-        <dependency>
-            <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-webflux-ui</artifactId>
-            <version>${springdoc.version}</version>
         </dependency>
 
         <!-- Jwt -->

@@ -1,6 +1,6 @@
 package net.hwyz.iov.cloud.mpt.gateway.filter;
 
-import net.hwyz.iov.cloud.mpt.gateway.util.ServletUtils;
+import net.hwyz.iov.cloud.framework.common.util.ServletUtil;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
 import org.springframework.stereotype.Component;
@@ -25,7 +25,7 @@ public class BlackListUrlFilter extends AbstractGatewayFilterFactory<BlackListUr
             String url = exchange.getRequest().getURI().getPath();
             if (config.matchBlacklist(url))
             {
-                return ServletUtils.webFluxResponseWriter(exchange.getResponse(), "请求地址不允许访问");
+                return ServletUtil.webFluxResponseWriter(exchange.getResponse(), "请求地址不允许访问");
             }
 
             return chain.filter(exchange);
