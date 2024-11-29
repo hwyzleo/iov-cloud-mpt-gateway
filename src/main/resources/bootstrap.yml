@@ -4,8 +4,6 @@ server:
 spring: 
   application:
     name: mpt-gateway
-  profiles:
-    active: dev
   cloud:
     nacos:
       discovery:
@@ -15,7 +13,9 @@ spring:
         server-addr: ${NACOS_URL}
         namespace: 32c13f29-1aa6-468a-bacb-81be7f437dc9
         name: mpt-gateway
-        file-extension: properties
+        file-extension: yaml
+        shared-configs:
+          - application.yaml
     sentinel:
       eager: true
       transport:

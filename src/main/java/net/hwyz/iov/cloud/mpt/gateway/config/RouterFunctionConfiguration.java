@@ -12,7 +12,7 @@ import org.springframework.web.reactive.function.server.RouterFunctions;
 /**
  * 路由配置信息
  *
- * @author ruoyi
+ * @author hwyz_leo
  */
 @Configuration
 public class RouterFunctionConfiguration {
@@ -22,8 +22,7 @@ public class RouterFunctionConfiguration {
     @SuppressWarnings("rawtypes")
     @Bean
     public RouterFunction routerFunction() {
-        return RouterFunctions.route(
-                RequestPredicates.GET("/code").and(RequestPredicates.accept(MediaType.TEXT_PLAIN)),
-                validateCodeHandler);
+        return RouterFunctions.route(RequestPredicates.GET("/code")
+                .and(RequestPredicates.accept(MediaType.TEXT_PLAIN)), validateCodeHandler);
     }
 }

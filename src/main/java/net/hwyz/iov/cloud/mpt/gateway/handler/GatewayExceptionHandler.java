@@ -1,8 +1,7 @@
 package net.hwyz.iov.cloud.mpt.gateway.handler;
 
+import lombok.extern.slf4j.Slf4j;
 import net.hwyz.iov.cloud.framework.common.util.ServletUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.boot.web.reactive.error.ErrorWebExceptionHandler;
 import org.springframework.cloud.gateway.support.NotFoundException;
 import org.springframework.context.annotation.Configuration;
@@ -15,12 +14,12 @@ import reactor.core.publisher.Mono;
 /**
  * 网关统一异常处理
  *
- * @author ruoyi
+ * @author hwyz_leo
  */
+@Slf4j
 @Order(-1)
 @Configuration
 public class GatewayExceptionHandler implements ErrorWebExceptionHandler {
-    private static final Logger log = LoggerFactory.getLogger(GatewayExceptionHandler.class);
 
     @Override
     public Mono<Void> handle(ServerWebExchange exchange, Throwable ex) {
@@ -41,7 +40,7 @@ public class GatewayExceptionHandler implements ErrorWebExceptionHandler {
             msg = "内部服务器错误";
         }
 
-        log.error("[网关异常处理]请求路径:{},异常信息:{}", exchange.getRequest().getPath(), ex.getMessage());
+        logger.error("[网关异常处理]请求路径:{},异常信息:{}", exchange.getRequest().getPath(), ex.getMessage());
 
         return ServletUtil.webFluxResponseWriter(response, msg);
     }

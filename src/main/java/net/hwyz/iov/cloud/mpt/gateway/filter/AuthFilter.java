@@ -4,12 +4,12 @@ import cn.hutool.core.util.StrUtil;
 import io.jsonwebtoken.Claims;
 import net.hwyz.iov.cloud.framework.common.constant.CacheConstants;
 import net.hwyz.iov.cloud.framework.common.constant.HttpStatus;
+import net.hwyz.iov.cloud.framework.common.constant.SecurityConstants;
 import net.hwyz.iov.cloud.framework.common.constant.TokenConstants;
+import net.hwyz.iov.cloud.framework.common.util.JwtUtil;
 import net.hwyz.iov.cloud.framework.common.util.ServletUtil;
 import net.hwyz.iov.cloud.framework.redis.service.RedisService;
 import net.hwyz.iov.cloud.mpt.gateway.config.properties.IgnoreWhiteProperties;
-import net.hwyz.iov.cloud.mpt.gateway.constant.SecurityConstants;
-import net.hwyz.iov.cloud.mpt.gateway.util.JwtUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,7 @@ import java.util.List;
 /**
  * 网关鉴权
  *
- * @author ruoyi
+ * @author hwyz_leo
  */
 @Component
 public class AuthFilter implements GlobalFilter, Ordered {
@@ -57,17 +57,17 @@ public class AuthFilter implements GlobalFilter, Ordered {
         if (StrUtil.isEmpty(token)) {
             return unauthorizedResponse(exchange, "令牌不能为空");
         }
-        Claims claims = JwtUtils.parseToken(token);
+        Claims claims = JwtUtil.parseToken(token);
         if (claims == null) {
             return unauthorizedResponse(exchange, "令牌已过期或验证不正确！");
         }
-        String userkey = JwtUtils.getUserKey(claims);
+        String userkey = JwtUtil.getUserKey(claims);
         boolean islogin = redisService.hasKey(getTokenKey(userkey));
         if (!islogin) {
             return unauthorizedResponse(exchange, "登录状态已过期");
         }
-        String userid = JwtUtils.getUserId(claims);
-        String username = JwtUtils.getUserName(claims);
+        String userid = JwtUtil.getUserId(claims);
+        String username = JwtUtil.getUserName(claims);
         if (StrUtil.isEmpty(userid) || StrUtil.isEmpty(username)) {
             return unauthorizedResponse(exchange, "令牌验证失败");
         }

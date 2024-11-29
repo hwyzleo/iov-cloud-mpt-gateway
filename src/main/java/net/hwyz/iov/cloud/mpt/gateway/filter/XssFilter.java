@@ -27,7 +27,7 @@ import static net.hwyz.iov.cloud.mpt.gateway.filter.AuthFilter.matches;
 /**
  * 跨站脚本过滤器
  *
- * @author ruoyi
+ * @author hwyz_leo
  */
 @Component
 @ConditionalOnProperty(value = "security.xss.enabled", havingValue = "true")

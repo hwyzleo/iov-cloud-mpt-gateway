@@ -7,6 +7,7 @@
         <groupId>net.hwyz.iov.cloud.parent</groupId>
         <artifactId>cloud</artifactId>
         <version>0.0.1-SNAPSHOT</version>
+        <relativePath/>
     </parent>
 
     <groupId>net.hwyz.iov.cloud.mpt</groupId>
@@ -15,55 +16,36 @@
     <description>管理后台网关</description>
 
     <properties>
-            <framework-redis.version>0.0.1-SNAPSHOT</framework-redis.version>
-            <framework-common.version>0.0.1-SNAPSHOT</framework-common.version>
     </properties>
 
     <dependencies>
-
-        <!-- SpringCloud Gateway -->
+        <!-- SpringCloud网关 -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-gateway</artifactId>
         </dependency>
 
-        <!-- SpringCloud Alibaba Nacos -->
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-        </dependency>
-
-        <!-- SpringCloud Alibaba Nacos Config -->
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
-        </dependency>
-
-        <!-- SpringCloud Alibaba Sentinel -->
+        <!-- 流量控制相关 -->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
         </dependency>
-
-        <!-- SpringCloud Alibaba Sentinel Gateway -->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-alibaba-sentinel-gateway</artifactId>
         </dependency>
-
-        <!-- Sentinel Datasource Nacos -->
         <dependency>
             <groupId>com.alibaba.csp</groupId>
             <artifactId>sentinel-datasource-nacos</artifactId>
         </dependency>
 
-        <!-- SpringBoot Actuator -->
+        <!-- 健康状态 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
-        
-        <!-- SpringCloud Loadbalancer -->
+
+        <!-- 负载均衡 -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-loadbalancer</artifactId>
@@ -79,14 +61,12 @@
         <dependency>
             <groupId>net.hwyz.iov.cloud.framework</groupId>
             <artifactId>framework-common-starter</artifactId>
-            <version>${framework-common.version}</version>
         </dependency>
 
         <!-- 框架: Redis -->
         <dependency>
             <groupId>net.hwyz.iov.cloud.framework</groupId>
             <artifactId>framework-redis-starter</artifactId>
-            <version>${framework-redis.version}</version>
         </dependency>
 
         <!-- Jwt -->
@@ -95,6 +75,20 @@
             <artifactId>jjwt</artifactId>
         </dependency>
 
+        <!-- xml绑定 -->
+        <dependency>
+            <groupId>jakarta.xml.bind</groupId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
+        </dependency>
+
+        <!-- 解决MacOS上无法使用DNS的问题 -->
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-resolver-dns-native-macos</artifactId>
+            <classifier>osx-aarch_64</classifier>
+            <version>4.1.115.Final</version>
+            <scope>runtime</scope>
+        </dependency>
     </dependencies>
 
     <build>

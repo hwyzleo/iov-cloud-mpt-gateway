@@ -17,24 +17,19 @@ import java.io.IOException;
 /**
  * 验证码获取
  *
- * @author ruoyi
+ * @author hwyz_leo
  */
 @Component
-public class ValidateCodeHandler implements HandlerFunction<ServerResponse>
-{
+public class ValidateCodeHandler implements HandlerFunction<ServerResponse> {
     @Autowired
     private ValidateCodeService validateCodeService;
 
     @Override
-    public Mono<ServerResponse> handle(ServerRequest serverRequest)
-    {
+    public Mono<ServerResponse> handle(ServerRequest serverRequest) {
         AjaxResult ajax;
-        try
-        {
+        try {
             ajax = validateCodeService.createCaptcha();
-        }
-        catch (CaptchaException | IOException e)
-        {
+        } catch (CaptchaException | IOException e) {
             return Mono.error(e);
         }
         return ServerResponse.status(HttpStatus.OK).body(BodyInserters.fromValue(ajax));
