@@ -16,6 +16,7 @@ spring:
         file-extension: yaml
         shared-configs:
           - application.yaml
+          - redis.yaml
     sentinel:
       eager: true
       transport:
