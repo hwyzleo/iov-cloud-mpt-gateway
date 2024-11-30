@@ -4,7 +4,7 @@ import cn.hutool.core.util.StrUtil;
 import io.jsonwebtoken.Claims;
 import net.hwyz.iov.cloud.framework.common.constant.CacheConstants;
 import net.hwyz.iov.cloud.framework.common.constant.HttpStatus;
-import net.hwyz.iov.cloud.framework.common.constant.SecurityConstants;
+import net.hwyz.iov.cloud.framework.common.constant.MptSecurityConstants;
 import net.hwyz.iov.cloud.framework.common.constant.TokenConstants;
 import net.hwyz.iov.cloud.framework.common.util.JwtUtil;
 import net.hwyz.iov.cloud.framework.common.util.ServletUtil;
@@ -73,11 +73,11 @@ public class AuthFilter implements GlobalFilter, Ordered {
         }
 
         // 设置用户信息到请求
-        addHeader(mutate, SecurityConstants.USER_KEY, userkey);
-        addHeader(mutate, SecurityConstants.DETAILS_USER_ID, userid);
-        addHeader(mutate, SecurityConstants.DETAILS_USERNAME, username);
+        addHeader(mutate, MptSecurityConstants.USER_KEY, userkey);
+        addHeader(mutate, MptSecurityConstants.DETAILS_USER_ID, userid);
+        addHeader(mutate, MptSecurityConstants.DETAILS_USERNAME, username);
         // 内部请求来源参数清除
-        removeHeader(mutate, SecurityConstants.FROM_SOURCE);
+        removeHeader(mutate, MptSecurityConstants.FROM_SOURCE);
         return chain.filter(exchange.mutate().request(mutate.build()).build());
     }
 
@@ -111,7 +111,7 @@ public class AuthFilter implements GlobalFilter, Ordered {
      * 获取请求token
      */
     private String getToken(ServerHttpRequest request) {
-        String token = request.getHeaders().getFirst(SecurityConstants.AUTHORIZATION_HEADER);
+        String token = request.getHeaders().getFirst(MptSecurityConstants.AUTHORIZATION_HEADER);
         // 如果前端设置了令牌前缀，则裁剪掉前缀
         if (StrUtil.isNotEmpty(token) && token.startsWith(TokenConstants.PREFIX)) {
             token = token.replaceFirst(TokenConstants.PREFIX, StrUtil.EMPTY);
