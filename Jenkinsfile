@@ -12,7 +12,7 @@ pipeline {
                 script {
                     sh '''
                         echo '============================== 构建镜像 =============================='
-                        docker build -t ${IMAGE_NAME} -f ../Dockerfile .
+                        docker build -t ${IMAGE_NAME} -f ../DockerfileCaptcha .
                     '''
                 }
             }
